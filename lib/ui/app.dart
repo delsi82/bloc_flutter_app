@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return AppView();
-  }
+  Widget build(BuildContext context) => AppView();
 }
 
 class AppView extends StatefulWidget {
@@ -17,7 +15,16 @@ class _AppViewState extends State<AppView> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Center(child: Text("Hi there!"));
+    return MaterialApp(
+      onGenerateTitle: (BuildContext context) => "Pokemon Flutter App",
+      builder: (context,child) {
+        return Container(
+          child: Center(
+            child: Text("Hi,there"),
+          ),
+        );
+      },
+    );
   }
   
 }
