@@ -14,4 +14,3 @@ void main() {
   Bloc.observer = AppBlocObserver();
   runApp(App());
 }
-
