@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:pokemon_flutter_app/ui/home/bloc/home_bloc.dart';
 import 'package:pokemon_flutter_app/ui/home/poke_card.dart';
 import 'package:pokemon_flutter_app/ui/widget/shimmer_loading.dart';
@@ -38,12 +39,13 @@ class _HomeState extends State<HomeView> {
             ),
             body: Padding(
               padding: EdgeInsets.only(top: 20,bottom: 20),
-              child: ListView.separated(
-                  itemBuilder: (context, index) => ShimmerLoading(
-                    isLoading: _isLoading,
-                    child: PokeCard(
-                      pokemon: _isLoading ? null : _list[index],
-                    ),
+              child: _isLoading ? Center(
+                child: Lottie.asset(
+                  'assets/lottie/loader.json'
+                ),
+              ) : ListView.separated(
+                  itemBuilder: (context, index) => PokeCard(
+                    pokemon: _isLoading ? null : _list[index],
                   ),
                   separatorBuilder: (context, index) => Container(
                     height: 2,

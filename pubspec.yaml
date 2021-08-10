@@ -33,6 +33,7 @@ dependencies:
   http: ^0.13.3
   equatable: ^2.0.3
   cached_network_image: ^3.1.0
+  lottie: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -50,8 +51,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - assets/lottie/
 flutter_icons:
   android: "launcher_icon"
   ios: true
   image_path: "assets/icon/app_icon.png"
+
+
