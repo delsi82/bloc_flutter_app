@@ -11,14 +11,14 @@ class PokemonRepository {
   AppService _appService = AppService();
 
   Future<List<PokemonLight>> getPokemonList(
-      {String url =
-          "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0"}) async {
-    http.Response apiResponse = await _appService.get(endpoint: url);
+      {int page = 0}) async {
+    http.Response apiResponse = await _appService.get(endpoint: "https://pokeapi.co/api/v2/pokemon?limit=20&offset=$page");
     List<PokemonLight> pokeList = [];
     if (apiResponse.statusCode == 200) {
       PokemonList pokeArray =
           PokemonList.fromJson(jsonDecode(apiResponse.body));
       if (pokeArray.results != null) {
+
         for (var result in pokeArray.results!) {
           if (result.url.isNotEmpty) {
             //TODO: check if the name is in the local db

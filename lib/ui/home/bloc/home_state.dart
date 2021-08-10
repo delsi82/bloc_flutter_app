@@ -23,6 +23,15 @@ class HomeSuccess extends HomeState {
   List<Object> get props => [list ?? []];
 }
 
+class HomeLoadedNext extends HomeState {
+  final List<PokemonLight>? list;
+
+  const HomeLoadedNext({this.list});
+
+  @override
+  List<Object> get props => [list ?? []];
+}
+
 class HomeError extends HomeState {
   final String error;
 

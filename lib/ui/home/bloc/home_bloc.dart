@@ -7,6 +7,7 @@ import 'package:pokemon_flutter_app/data/remote/dto/pokemon.dart';
 import 'package:pokemon_flutter_app/data/repository/pokemon_repository.dart';
 
 part 'home_event.dart';
+
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -21,14 +22,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     switch (event.runtimeType) {
       case HomeInit:
         yield* loadPokemonList();
+        break;
+      case HomeLoadNext:
+        yield* loadPokemonList(offset: (event as HomeLoadNext).numberRow);
+        break;
     }
   }
 
-  Stream<HomeState> loadPokemonList() async* {
-    yield HomeLoading();
-
+  Stream<HomeState> loadPokemonList({int offset = 0}) async* {
     try {
-      yield HomeSuccess(list: await _repository.getPokemonList());
+      if (offset == 0) {
+        yield HomeLoading();
+        yield HomeSuccess(list: await _repository.getPokemonList());
+      } else
+        yield HomeLoadedNext(
+            list: await _repository.getPokemonList(page: offset));
     } catch (e) {
       yield HomeError(error: e.toString());
     }
